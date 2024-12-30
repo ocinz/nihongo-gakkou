@@ -10,33 +10,34 @@ pipeline {
         AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
     }
     stages {
-        stage('Test Build') {
+        stage('Build Docker Image') {
             steps {
-                script {
-                    sh ("echo $POSTGRES_USER, $POSTGRES_PASSWORD, $GITHUB_TOKEN, $AUTH_GOOGLE_ID, $AUTH_GOOGLE_SECRET")
-                }
+                sh """
+                sudo docker build -t ${DOCKER_IMAGE} .
+                """
             }
         }
-        // stage("Build Docker Image") {
-        //     steps {
-        //         script(){
-        //             sh("sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER")
-        //         }
-        //     }
-        // }
-        // stage('Login to GitHub Container Registry') {
-        //     steps {
-        //         script {
-        //             sh "echo $GITHUB_TOKEN | docker login ghcr.io -u ocinz --password-stdin"
-        //         }
-        //     }
-        // }
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             sh "docker push $DOCKER_IMAGE:$BUILD_NUMBER"
-        //         }
-        //     }
-        // }
+
+        stage('Push Docker Image') {
+            steps {
+                sh """
+                echo ${GITHUB_TOKEN} | docker login ghcr.io -u <your-github-username> --password-stdin
+                docker push ${DOCKER_IMAGE}
+                """
+            }
+        }
+
+        stage('Deploy with Docker Compose') {
+            steps {
+                sh """
+                echo "POSTGRES_USER=${POSTGRES_USER}" > .env
+                echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> .env
+                echo "POSTGRES_DB=${POSTGRES_DB}" >> .env
+
+                docker-compose down
+                docker-compose up -d
+                """
+            }
+        }
     }
 }
