@@ -4,8 +4,7 @@ services:
   postgres:
     image: postgres:15
     container_name: postgres
-    env_file:
-      - .env
+    env_file: ".env"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -17,15 +16,13 @@ services:
     image: ghcr.io/ocinz/nihongo-gakkou:${BUILD_NUMBER}
     container_name: nihongo
     working_dir: /app
-    env_file:
-      - .env
+    env_file: ".env"
     environment:
       - DATABASE_URL=${DATABASE_URL}
     volumes:
       - .:/app
     ports:
       - "3001:3000"
-    command: sh -c "npm install && npm run dev"
     depends_on:
       - postgres
 
