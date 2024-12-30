@@ -21,7 +21,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 sh """
-                echo ${GITHUB_TOKEN} | docker login ghcr.io -u <your-github-username> --password-stdin
+                echo ${GITHUB_TOKEN} | docker login ghcr.io -u ocinz --password-stdin
                 docker push ${DOCKER_IMAGE}
                 """
             }
