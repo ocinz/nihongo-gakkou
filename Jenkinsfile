@@ -7,6 +7,11 @@ pipeline {
     }
 
     stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ocinz/nihongo-gakkou.git'
+            }
+        }
         stage("Check docker container access") {
             steps {
                 sh "docker ps"
@@ -14,11 +19,7 @@ pipeline {
             }
             
         }
-        // stage('Checkout Code') {
-        //     steps {
-        //         git branch: 'main', url: 'https://github.com/username/repository.git'
-        //     }
-        // }
+        
 
         // stage('Build Docker Image') {
         //     steps {
