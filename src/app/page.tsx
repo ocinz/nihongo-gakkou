@@ -1,7 +1,5 @@
 import { auth, } from "@/auth";
 import BreadCrumb from "@/components/breadcrumb";
-// import { GoogleSignin } from "@/components/google-signin";
-// import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Command, CommandIcon } from "lucide-react";
@@ -12,19 +10,9 @@ import {
   Card,
   CardContent,
   CardDescription,
-  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-// import { Input } from "@/components/ui/input"
-// import { Label } from "@/components/ui/label"
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select"
 import Link from "next/link";
 
 
@@ -32,10 +20,28 @@ export default async function HomePage() {
   const session = await auth();
   if (!session) return <>
     <div className=" flex flex-row items-center gap-x-2 justify-center mt-20">
-      <h2 className=" text-6xl ">Welcome to Nihongo Gakkou </h2>
-      <Command size={40} className=" " />
+      <h2 className=" sm:text-xl md:text-2xl lg:text-6xl ">Welcome to Nihongo Gakkou </h2>
+      <Command className=" sm:size-5 " />
     </div>
-    <h2 className=" text-2xl text-center">Web Belajar Bahasa Jepang dengan Latihan dan TryOut!  </h2>
+    <h2 className=" text-base sm:text-lg md:text-2xl text-center">Web Belajar Bahasa Jepang dengan Latihan dan TryOut!  </h2>
+    <div className=" pt-10 mx-10 lg:pt-20 grid grid-cols-2 gap-y-4 lg:grid-cols-4 gap-x-4 text-black [&>*]:rounded-xl [&>*]:bg-slate-200 [&>*]:h-28 [&>*]:lg:h-40 [&>*]:lg:text-4xl text-2xl [&>*]:text-center [&>*]:p-2 [&>*]:lg:p-8">
+      <div>
+        <h2 >文字語彙</h2>
+        <h4>Moji Goi</h4>
+      </div>
+      <div>
+        <h2 >文法</h2>
+        <h4>Bunpou</h4>
+      </div>
+      <div>
+        <h2 >聴解</h2>
+        <h4>Choukai</h4>
+      </div><div>
+        <h2 >読解</h2>
+        <h4>Dokkai</h4>
+      </div>
+
+    </div>
 
   </>;
   return (

@@ -55,12 +55,12 @@ export default async function RootLayout({
                 </TooltipProvider>
               </SidebarProvider>
             </> : <>
-              <div className="my-6 mx-8">
+              <div className="my-6 mx-4 md:mx-4 lg:mx-8 xl:mx-16">
                 <div className=" flex flex-row justify-between mb-8">
                   <Link href={"/"}>
                     <div className="flex flex-row gap-x-2 items-center">
-                      <Command className="size-8" />
-                      <h1 className=" text-3xl">NIHONGO GAKKOU</h1>
+                      <Command className="size-8 md:size-12 lg:size-18" />
+                      <h1 className=" text-sm md:text-base lg:text-2xl xl:text-3xl">NIHONGO GAKKOU</h1>
                     </div>
                   </Link>
                   <NavigationMenuDemo />

@@ -39,25 +39,13 @@ const components: { title: string; href: string; description: string }[] = [
         href: "/exam",
         description: "Try Out JLPT supaya kamu siap mengahadi Ujian sesungguhnya.",
     },
-    // {
-    //     title: "Tabs",
-    //     href: "/docs/primitives/tabs",
-    //     description:
-    //         "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-    // },
-    // {
-    //     title: "Tooltip",
-    //     href: "/docs/primitives/tooltip",
-    //     description:
-    //         "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-    // },
 ]
 
 export function NavigationMenuDemo() {
     return (
         <NavigationMenu>
-            <NavigationMenuList className=" gap-x-3">
-                <NavigationMenuItem>
+            <NavigationMenuList className=" gap-x-[2px] md:gap-x-3">
+                <NavigationMenuItem className=" hidden md:block">
                     <NavigationMenuTrigger>Components</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -73,7 +61,7 @@ export function NavigationMenuDemo() {
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                <NavigationMenuItem className=" hidden md:block">
                     <NavigationMenuTrigger>Project Lain</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -105,15 +93,14 @@ export function NavigationMenuDemo() {
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
-
-                <NavigationMenuItem>
+                <NavigationMenuItem className="">
                     <Link href="/material" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Materi Pelajaran
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                <NavigationMenuItem className=" hidden md:block">
                     <Link href="/enrichment" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Pengayaan

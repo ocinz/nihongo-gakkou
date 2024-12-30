@@ -13,7 +13,7 @@ export function GoogleSignin() {
                         fill="currentColor"
                     />
                 </svg>
-                Login with Google
+                Login <span className=" hidden md:block">with Google</span>
             </Button>
         </form>
     )
