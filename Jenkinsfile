@@ -2,12 +2,12 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = "ghcr.io/ocinz/nihongo-gakkou" 
-        POSTGRES_USER = credentials('POSTGRES_USER')     
-        POSTGRES_PASSWORD = credentials('POSTGRES_PASSWORD')
-        // POSTGRES_DB = credentials('POSTGRES_DB')
+        POSTGRES_USER = credentials('NIHONGO_GAKKOU_POSTGRES_USER')     
+        POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
+        POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
-        AUTH_GOOGLE_ID= credentials('AUTH_GOOGLE_ID')
-        AUTH_GOOGLE_SECRET= credentials('AUTH_GOOGLE_SECRET')
+        AUTH_GOOGLE_ID= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_ID')
+        AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
     }
     stages {
         stage('Test Build') {
