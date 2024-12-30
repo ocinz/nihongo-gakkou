@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                sh 'docker system prune -a --volumes --force'
+                sh 'sudo docker system prune -a --volumes --force'
             }
         }
         stage('Build Docker Image') {
