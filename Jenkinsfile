@@ -20,13 +20,13 @@ pipeline {
         }
 
         stage('Push Docker Image') {
+            // #! /bin/bash
+            // set -e
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-ghcr-token', 
                                                  usernameVariable: 'github-username', 
                                                  passwordVariable: 'github-token')]) {
                     sh """
-                    #! /bin/bash
-                    set -e
                     echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin 
                     docker push $DOCKER_IMAGE:$BUILD_NUMBER
                     """
