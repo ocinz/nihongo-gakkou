@@ -17,11 +17,14 @@ pipeline {
                 """
             }
         }
-
+        stage('login to GHCR') {
+            steps {
+                sh 'echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
+            }
+        }
         stage('Push Docker Image') {
             steps{
-                sh("echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin")
-                sh("docker push $DOCKER_IMAGE:$BUILD_NUMBER")
+                sh('docker push $DOCKER_IMAGE:$BUILD_NUMBER')
             }
         }
 
