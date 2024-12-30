@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps{
-                sh('docker push $DOCKER_IMAGE:$BUILD_NUMBER')
+                sh('sudo docker push $DOCKER_IMAGE:$BUILD_NUMBER')
             }
         }
 
