@@ -42,6 +42,8 @@ pipeline {
                 echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
                 echo "DATABASE_URL=$POSTGRES_DB" >> .env
                 echo "BUILD_NUMBER=$BUILD_NUMBER" >> .env
+                echo "AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID" >> .env
+                echo "AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET" >> .env
 
                 sudo docker-compose down
                 sudo docker-compose up -d
