@@ -4,7 +4,7 @@ pipeline {
         DOCKER_IMAGE = "ghcr.io/ocinz/nihongo-gakkou" 
         POSTGRES_USER = credentials('POSTGRES_USER')     
         POSTGRES_PASSWORD = credentials('POSTGRES_PASSWORD')
-        POSTGRES_DB = credentials('POSTGRES_DB')
+        // POSTGRES_DB = credentials('POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
         AUTH_GOOGLE_ID= credentials('AUTH_GOOGLE_ID')
         AUTH_GOOGLE_SECRET= credentials('AUTH_GOOGLE_SECRET')
@@ -13,7 +13,7 @@ pipeline {
         stage('Test Build') {
             steps {
                 script {
-                    sh ("echo $POSTGRES_USER, $POSTGRES_PASSWORD, $POSTGRES_DB, $GITHUB_TOKEN, $AUTH_GOOGLE_ID, $AUTH_GOOGLE_SECRET")
+                    sh ("echo $POSTGRES_USER, $POSTGRES_PASSWORD, $GITHUB_TOKEN, $AUTH_GOOGLE_ID, $AUTH_GOOGLE_SECRET")
                 }
             }
         }
