@@ -11,7 +11,7 @@ ENV DATABASE_URL="postgresql://user:password@domain.comm/database?schema=schema"
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Copy application code
