@@ -51,17 +51,17 @@ pipeline {
             }
         }
 
-        // stage('Prisma Migrations') {
-        //     steps {
-        //         script {
-        //             sleep(10)
+        stage('Prisma Migrations') {
+            steps {
+                script {
+                    sleep(10)
 
-        //             sh """
-        //             docker-compose exec -T nextjs-app npx prisma migrate deploy
-        //             """
-        //         }
-        //     }
-        // }
+                    sh """
+                    sudo docker-compose exec -T nihongo npx prisma migrate deploy
+                    """
+                }
+            }
+        }
     }
     post{
         always {
