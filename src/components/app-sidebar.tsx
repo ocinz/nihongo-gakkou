@@ -1,27 +1,21 @@
 "use client"
-import { useSession, SessionProvider } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import * as React from "react"
 import {
     BookOpen,
     BookOpenCheck,
-    Bot,
     Command,
     Fingerprint,
-    Frame,
     Home,
     IdCard,
     LifeBuoy,
-    Map,
     Newspaper,
-    PieChart,
     Send,
     Settings2,
-    SquareTerminal,
     User2,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {

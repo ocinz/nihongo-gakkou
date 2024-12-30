@@ -1,7 +1,6 @@
 "use client"
 import { usePathname } from "next/navigation";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { string } from "zod";
 
 export default function BreadCrumb() {
     const pathname = usePathname().split("/")

@@ -13,7 +13,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                sudo docker build -t ${DOCKER_IMAGE} .
+                sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .
                 """
             }
         }
@@ -33,10 +33,23 @@ pipeline {
                 echo "POSTGRES_USER=${POSTGRES_USER}" > .env
                 echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> .env
                 echo "POSTGRES_DB=${POSTGRES_DB}" >> .env
+                echo "DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@ocinz.tech:8081/gakkou?schema=gakkou}" >> .env
 
                 docker-compose down
                 docker-compose up -d
                 """
+            }
+        }
+
+        stage('Prisma Migrations') {
+            steps {
+                script {
+                    sleep(10)
+
+                    sh """
+                    docker-compose exec -T nextjs-app npx prisma migrate deploy
+                    """
+                }
             }
         }
     }

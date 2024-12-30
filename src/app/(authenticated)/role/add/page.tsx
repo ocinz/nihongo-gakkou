@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 
 export default function Page() {
@@ -5,7 +6,6 @@ export default function Page() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Add your form submission logic here
         console.log('Role Name:', roleName);
     };
 
