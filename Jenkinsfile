@@ -10,7 +10,7 @@ pipeline {
         AUTH_GOOGLE_SECRET= credentials('AUTH_GOOGLE_SECRET')
     }
     stages {
-        stage(name: 'Test Build') {
+        stage('Test Build') {
             steps {
                 script {
                     sh ("echo $POSTGRES_USER, $POSTGRES_PASSWORD, $POSTGRES_DB, $GITHUB_TOKEN, $AUTH_GOOGLE_ID, $AUTH_GOOGLE_SECRET")
