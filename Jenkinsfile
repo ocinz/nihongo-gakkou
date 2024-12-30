@@ -9,6 +9,7 @@ pipeline {
         stage("Check docker container access") {
             steps {
                 sh "sudo docker ps"
+                sh("ls -l")
                 
             }
             
