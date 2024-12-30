@@ -1,11 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+import { prisma } from "@/prisma";
 
 async function main() {
   const menus = await prisma.menu.createManyAndReturn({
