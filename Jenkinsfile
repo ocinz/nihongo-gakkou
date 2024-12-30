@@ -21,25 +21,28 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-ghcr-token', 
+                                                 usernameVariable: 'github-username', 
+                                                 passwordVariable: 'github-token')]) {
                     sh """
                     #! /bin/bash
                     set -e
                     echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin 
                     docker push $DOCKER_IMAGE:$BUILD_NUMBER
-                    echo "successfully pushed image to ghcr.io"
                     """
-                    sh("sudo docker pull $DOCKER_IMAGE:$BUILD_NUMBER")
-                    sh("sudo docker container ls -a")
+                }
+                sh("sudo docker image pull $DOCKER_IMAGE:$BUILD_NUMBER")
+                sh("sudo docker container ls -a")
             }
         }
 
         stage('Deploy with Docker Compose') {
             steps {
                 sh """
-                echo "POSTGRES_USER=$POSTGRES_USER" > .env
-                echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
-                echo "POSTGRES_DB=$POSTGRES_DB" >> .env
-                echo "DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@ocinz.tech:8081/gakkou?schema=gakkou}" >> .env
+                echo "POSTGRES_USER=${POSTGRES_USER}" > .env
+                echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> .env
+                echo "POSTGRES_DB=${POSTGRES_DB}" >> .env
+                echo "DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@ocinz.tech:8081/gakkou?schema=gakkou}" >> .env
 
                 docker-compose down
                 docker-compose up -d
