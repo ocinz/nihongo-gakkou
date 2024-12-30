@@ -29,6 +29,7 @@ pipeline {
                     set -e
                     echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin 
                     docker push $DOCKER_IMAGE:$BUILD_NUMBER
+                    echo "successfully pushed image to ghcr.io"
                     """
                 }
             }
