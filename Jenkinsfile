@@ -23,21 +23,6 @@ pipeline {
                 sh("echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin")
                 sh("docker push $DOCKER_IMAGE:$BUILD_NUMBER")
             }
-
-            // #! /bin/bash
-            // set -e
-            // steps {
-            //     withCredentials([usernamePassword(credentialsId: 'docker-ghcr-token', 
-            //                                      usernameVariable: 'github-username', 
-            //                                      passwordVariable: 'github-token')]) {
-            //         sh """
-            //         docker login ghcr.io -u ocinz --password-stdin 
-            //         docker push $DOCKER_IMAGE:$BUILD_NUMBER
-            //         """
-            //     }
-            //     sh("sudo docker image pull $DOCKER_IMAGE:$BUILD_NUMBER")
-            //     sh("sudo docker container ls -a")
-            // }
         }
 
         stage('Deploy with Docker Compose') {
