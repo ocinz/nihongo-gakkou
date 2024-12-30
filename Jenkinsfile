@@ -20,7 +20,8 @@ pipeline {
 
         stage('Push Docker Image') {
             steps{
-                sh "echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin"
+                sh("echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin")
+                sh("docker push $DOCKER_IMAGE:$BUILD_NUMBER")
             }
 
             // #! /bin/bash
@@ -63,6 +64,11 @@ pipeline {
                     """
                 }
             }
+        }
+    }
+    post{
+        always: {
+            sh("docker logout")
         }
     }
 }
