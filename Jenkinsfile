@@ -41,6 +41,7 @@ pipeline {
                 echo "POSTGRES_USER=$POSTGRES_USER" > .env
                 echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
                 echo "DATABASE_URL=$POSTGRES_DB" >> .env
+                echo "BUILD_NUMBER=$BUILD_NUMBER" >> .env
 
                 sudo docker-compose down
                 sudo docker-compose up -d
