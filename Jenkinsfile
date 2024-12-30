@@ -6,6 +6,7 @@ pipeline {
         POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
+        GITHUB_USERNAME = credentials('github-username')
         AUTH_GOOGLE_ID= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_ID')
         AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
     }
@@ -20,9 +21,14 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-ghcr-token', 
+                                                 usernameVariable: 'github-username', 
+                                                 passwordVariable: 'github-token')]) {
                     sh """
-                    echo ${GITHUB_TOKEN} | docker login ghcr.io -u ocinz --password-stdin
+                    #! /bin/bash
+                    set -e
+                    echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin 
+                    docker push $DOCKER_IMAGE:$BUILD_NUMBER
                     """
                 }
             }
