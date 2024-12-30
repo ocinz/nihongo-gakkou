@@ -5,16 +5,7 @@ pipeline {
         DOCKER_IMAGE = "username/nextjs-app" // Ganti dengan nama image Anda
         KUBERNETES_DEPLOYMENT = "nextjs-deployment"
     }
-    trigger {
-        githubPush()
-    }
-
     stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/ocinz/nihongo-gakkou.git'
-            }
-        }
         stage("Check docker container access") {
             steps {
                 sh "docker ps"
