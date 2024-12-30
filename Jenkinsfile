@@ -2,17 +2,32 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "username/nextjs-app" // Ganti dengan nama image Anda
+        DOCKER_IMAGE = "ghcr.io/ocinz/nihongo-gakkou" 
         KUBERNETES_DEPLOYMENT = "nextjs-deployment"
     }
     stages {
-        stage("Check docker container access") {
+        stage("Build Docker Image") {
             steps {
-                sh "sudo docker ps"
-                sh("ls -l")
-                
+                script(){
+                    sh("sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER")
+                }
             }
             
+        }
+        stage('Login to GitHub Container Registry') {
+            steps {
+                script {
+                    sh "echo $GITHUB_TOKEN | docker login ghcr.io -u ocinz --password-stdin"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    sh "docker push $DOCKER_IMAGE:$BUILD_NUMBER"
+                }
+            }
         }
         
 
