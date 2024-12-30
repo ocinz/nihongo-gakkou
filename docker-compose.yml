@@ -12,6 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
   nextap:
     image: ghcr.io/ocinz/nihongo-gakkou:${BUILD_NUMBER}
     container_name: nihongo
