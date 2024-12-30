@@ -6,13 +6,13 @@ WORKDIR /app
 
 # Copy package.json and install dependencies
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN npm install
 
 # Copy application code
 COPY . .
 
 # Build the application
-RUN yarn build
+RUN npm build
 
 # Expose the port
 EXPOSE 3000
