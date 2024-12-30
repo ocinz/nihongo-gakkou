@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage("Check docker container access") {
             steps {
-                sh "docker ps"
+                sh "sudo docker ps"
                 
             }
             
