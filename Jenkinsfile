@@ -22,12 +22,12 @@ pipeline {
         }
         stage('tag image') {
             steps {
-                sh 'docker tag $IMAGE_NAME:$BUILD_NUMBER ghcr.io/$IMAGE_NAME:$BUILD_NUMBER'
+                sh 'docker tag $DOCKER_IMAGE:$BUILD_NUMBER ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
             }
         }
         stage('push image') {
             steps {
-                sh 'sudo docker push ghcr.io/$IMAGE_NAME:$BUILD_NUMBER'
+                sh 'sudo docker push ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
             }
         }
         // stage('Push Docker Image') {
