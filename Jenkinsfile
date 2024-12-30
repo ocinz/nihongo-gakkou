@@ -10,7 +10,9 @@ pipeline {
         stage("Check docker container access") {
             steps {
                 sh "docker ps"
+                sh "docker contianer ls -a"
             }
+            
         }
         // stage('Checkout Code') {
         //     steps {
