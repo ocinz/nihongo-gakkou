@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = "ghcr.io/ocinz/nihongo-gakkou" 
+        DOCKER_IMAGE = "ocinz/nihongo-gakkou" 
         // POSTGRES_USER = credentials('NIHONGO_GAKKOU_POSTGRES_USER')     
         // POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         // POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
@@ -12,21 +12,29 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh """
-                sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .
-                """
+                sh 'sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
             }
         }
-        stage('login to GHCR') {
+        stage('Login to GHCR') {
             steps {
                 sh 'echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
             }
         }
-        stage('Push Docker Image') {
-            steps{
-                sh('sudo docker push $DOCKER_IMAGE:$BUILD_NUMBER')
+        stage('tag image') {
+            steps {
+                sh 'docker tag $IMAGE_NAME:$BUILD_NUMBER ghcr.io/$IMAGE_NAME:$BUILD_NUMBER'
             }
         }
+        stage('push image') {
+            steps {
+                sh 'sudo docker push ghcr.io/$IMAGE_NAME:$BUILD_NUMBER'
+            }
+        }
+        // stage('Push Docker Image') {
+        //     steps{
+        //         sh('sudo docker push $DOCKER_IMAGE:$BUILD_NUMBER')
+        //     }
+        // }
 
         // stage('Deploy with Docker Compose') {
         //     steps {
