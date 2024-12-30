@@ -57,7 +57,7 @@ pipeline {
                     sleep(10)
 
                     sh """
-                    sudo docker-compose exec -T nihongo npx prisma migrate deploy
+                    sudo docker compose exec -T nihongo npx prisma migrate deploy
                     """
                 }
             }
