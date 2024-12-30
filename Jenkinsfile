@@ -54,7 +54,7 @@ pipeline {
         stage('Prisma Migrations') {
             steps {
                 script {
-                    sleep(10)
+                    sleep(30)
 
                     sh """
                     sudo docker compose exec -T nihongo npx prisma migrate deploy
