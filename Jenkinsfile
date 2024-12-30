@@ -10,6 +10,11 @@ pipeline {
         // AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
     }
     stages {
+        stage('Cleanup') {
+            steps {
+                sh 'docker system prune -a --volumes --force'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh 'sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
@@ -17,12 +22,12 @@ pipeline {
         }
         stage('Login to GHCR') {
             steps {
-                sh 'echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
+                sh 'echo $GITHUB_TOKEN_PSW | sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
             }
         }
         stage('tag image') {
             steps {
-                sh 'docker tag $DOCKER_IMAGE:$BUILD_NUMBER ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
+                sh 'sudo docker tag $DOCKER_IMAGE:$BUILD_NUMBER ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
             }
         }
         stage('push image') {
