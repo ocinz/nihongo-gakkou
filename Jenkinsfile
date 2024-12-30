@@ -27,7 +27,7 @@ pipeline {
                                                  usernameVariable: 'github-username', 
                                                  passwordVariable: 'github-token')]) {
                     sh """
-                    echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin 
+                    docker login ghcr.io -u ocinz --password-stdin 
                     docker push $DOCKER_IMAGE:$BUILD_NUMBER
                     """
                 }
