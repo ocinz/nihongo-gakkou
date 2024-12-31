@@ -21,6 +21,7 @@ pipeline {
                 echo "BUILD_NUMBER=$BUILD_NUMBER" >> .env
                 echo "AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID" >> .env
                 echo "AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET" >> .env
+                echo "NODE_ENV=production" >> .env
                 """
             }
         }
