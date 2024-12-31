@@ -2,7 +2,7 @@
 node_modules
 
 # Ignore build output
-.next
+# .next
 out
 
 # Ignore logs
@@ -22,7 +22,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Ignore Dockerfile and docker-compose files
-Dockerfile
 docker-compose.yml
 
 # Ignore miscellaneous

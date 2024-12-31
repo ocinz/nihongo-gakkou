@@ -1,9 +1,15 @@
 "use client"
-import { Material } from "@prisma/client";
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.bubble.css"
-
-export default function Preview({ material }: { material: Material | null }) {
+type Level = "N1" | "N2" | "N3" | "N4" | "N5"
+export type Material = {
+    content: string;
+    userId: string;
+    title: string;
+    id: number;
+    level: Level;
+} | null
+export default function Preview({ material }: { material: Material }) {
     console.log(material);
 
     return <div className="mx-8 ">

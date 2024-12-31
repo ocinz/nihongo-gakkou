@@ -18,8 +18,8 @@ const FormSchema = z.object({
 })
 import { toast } from "@/hooks/use-toast"
 import { navigate, updateEnrichment, } from "../../actions"
-import { Enrichment } from "@prisma/client"
-export default function Editor({ enrichment }: { enrichment: Enrichment | null }) {
+import { Enrichment } from "../detail/preview"
+export default function Editor({ enrichment }: { enrichment: Enrichment }) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
