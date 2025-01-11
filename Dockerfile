@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-ENV PORT=3000
+# ENV PORT=3000
 # ENV key=value
 
 RUN npm install 
