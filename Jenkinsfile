@@ -43,15 +43,15 @@ pipeline {
             }
         }
 
-        stage('Prisma Migrations') {
-            steps {
-                script {
-                    sh """
-                    sudo docker compose exec -T nihongo npx prisma migrate deploy
-                    """
-                }
-            }
-        }
+        // stage('Prisma Migrations') {
+        //     steps {
+        //         script {
+        //             sh """
+        //             sudo docker compose exec -T nihongo npx prisma migrate deploy
+        //             """
+        //         }
+        //     }
+        // }
     }
     
 }
