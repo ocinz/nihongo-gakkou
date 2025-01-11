@@ -12,6 +12,7 @@ pipeline {
         GITHUB_TOKEN = credentials('github-token')
         NEXTAUTH_URL = "http://localhost:3001"
         AUTH_TRUST_HOST="True"
+        PORT = 3001
     }
     stages {
         stage('Docker Compose Down') {
