@@ -17,4 +17,4 @@ ENV PORT=3001
 EXPOSE ${PORT}
 
 # Start the application
-CMD ["npm", "run", "start", "--", "-p", "${PORT}"]
+CMD ["npm", "run", "start", "-p", "${PORT}"]
