@@ -12,15 +12,15 @@ pipeline {
         GITHUB_TOKEN = credentials('github-token')
     }
     stages {
-        // stage('docker build') {
-        //     steps {
-        //         script {
-        //             sh """
-        //             sudo docker build -t ${DOCKER_IMAGE} .
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Docker Compose Down') {
+            steps {
+                script {
+                    sh """
+                    sudo docker compose down
+                    """
+                }
+            }
+        }
         // stage('docker start') {
         //     steps {
         //         script {
