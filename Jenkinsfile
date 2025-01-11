@@ -11,7 +11,7 @@ pipeline {
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
         NEXTAUTH_URL = " http://localhost:3001"
-        AUTH_TRUST_HOST="http://localhost:3001"
+        AUTH_TRUST_HOST=True
     }
     stages {
         stage('Docker Compose Down') {
@@ -24,15 +24,6 @@ pipeline {
                 }
             }
         }
-        // stage('docker start') {
-        //     steps {
-        //         script {
-        //             sh """
-        //             sudo docker run -p 3000:3000 --name ${DOCKER_IMAGE} -e DATABASE_URL=${DATABASE_URL} -e AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID} -e AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET} -e NODE_ENV=${NODE_ENV} -e POSTGRES_USER=${POSTGRES_USER} -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -e POSTGRES_DB=${POSTGRES_DB} -d ${DOCKER_IMAGE}
-        //             """
-        //         }
-        //     }
-        // }
         stage('Build Docker Image') {
             steps {
                 sh 'sudo docker compose build'
@@ -43,16 +34,6 @@ pipeline {
                 sh 'sudo docker compose up -d'
             }
         }
-
-        // stage('Prisma Migrations') {
-        //     steps {
-        //         script {
-        //             sh """
-        //             sudo docker compose exec -T nihongo npx prisma migrate deploy
-        //             """
-        //         }
-        //     }
-        // }
     }
     
 }
