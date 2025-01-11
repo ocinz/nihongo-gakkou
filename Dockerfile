@@ -8,7 +8,7 @@ WORKDIR /app
 FROM base AS builder
 RUN apk add --no-cache postgresql-client
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json prisma ./
 RUN npm install 
 RUN npx prisma generate 
 
