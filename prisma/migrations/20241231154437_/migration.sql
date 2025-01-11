@@ -80,6 +80,16 @@ CREATE TABLE "Material" (
 );
 
 -- CreateTable
+CREATE TABLE "Enrichment" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR NOT NULL,
+    "content" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
+
+    CONSTRAINT "Enrichment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Question" (
     "id" SERIAL NOT NULL,
     "question_statement" TEXT NOT NULL,
@@ -125,6 +135,9 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Material" ADD CONSTRAINT "Material_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Enrichment" ADD CONSTRAINT "Enrichment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Practice" ADD CONSTRAINT "Practice_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
