@@ -2,7 +2,6 @@ services:
   postgres:
     image: postgres:15
     container_name: postgres
-    # restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -22,7 +21,6 @@ services:
         AUTH_GOOGLE_ID: ${AUTH_GOOGLE_ID}
         AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET}
         NODE_ENV: ${NODE_ENV}
-        # GITHUB_TOKEN: ${GITHUB_TOKEN}
         NEXTAUTH_URL: ${NEXTAUTH_URL}
         AUTH_TRUST_HOST: ${AUTH_TRUST_HOST}
         PORT: ${PORT}
@@ -31,7 +29,6 @@ services:
       - AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}
       - AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}
       - NODE_ENV=${NODE_ENV}
-      # - GITHUB_TOKEN=${GITHUB_TOKEN}
       - NEXTAUTH_URL=${NEXTAUTH_URL}
       - AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
       - PORT=${PORT}

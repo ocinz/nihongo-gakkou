@@ -3,7 +3,7 @@ pipeline {
     environment {
         NEXTAUTH_URL = "http://localhost:3001"
         AUTH_TRUST_HOST="True"
-        PORT='3001'
+        PORT="3001"
         DATABASE_URL = credentials('NIHONGO_GAKKOU_DATABASE_URL')
         AUTH_GOOGLE_ID= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_ID')
         AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
@@ -14,6 +14,18 @@ pipeline {
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
     }
     stages {
+        stage('Debug Environment Variables') {
+            steps {
+                script {
+                    sh """
+                    echo "NEXTAUTH_URL=${NEXTAUTH_URL}"
+                    echo "AUTH_TRUST_HOST=${AUTH_TRUST_HOST}"
+                    echo "PORT=${PORT}"
+                    echo "DATABASE_URL=${DATABASE_URL}"
+                    """
+                }
+            }
+        }
         stage('Docker Compose Down') {
             steps {
                 script {
