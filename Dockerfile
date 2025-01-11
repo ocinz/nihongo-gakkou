@@ -12,21 +12,10 @@ COPY package.json package-lock.json prisma ./
 RUN npm install 
 RUN npx prisma generate 
 
-# ARG DATABASE_URL
-# ENV DATABASE_URL=${DATABASE_URL}
-# RUN echo "DATABASE_URL is $DATABASE_URL"
-
-
 # # Stage 2: Build the application
 # FROM base AS builder
 COPY . .
-# Menunggu hingga PostgreSQL siap
 
-# RUN until pg_isready -d $DATABASE_URL; do \
-#     echo 'Waiting for PostgreSQL to be ready...'; \
-#     sleep 2; \
-#   done; \
-# RUN npm run prisma:migrate
 
 RUN npm run build
 # Stage 3: Prepare production image

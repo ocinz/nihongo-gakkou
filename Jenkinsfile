@@ -5,61 +5,39 @@ pipeline {
         AUTH_GOOGLE_ID= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_ID')
         AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
         NODE_ENV = "production"
-        DOCKER_IMAGE = "ocinz/nihongo-gakkou" 
+        DOCKER_IMAGE = "nihongo-gakkou" 
         POSTGRES_USER = credentials('NIHONGO_GAKKOU_POSTGRES_USER')     
         POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
     }
     stages {
-        // stage('Set ENV') {
+        // stage('docker build') {
         //     steps {
-        //         sh """
-        //         echo "POSTGRES_USER=$POSTGRES_USER" > .env
-        //         echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
-        //         echo "DATABASE_URL=$DATABASE_URL" >> .env
-        //         echo "POSTGRES_DB=$POSTGRES_DB" >> .env
-        //         echo "BUILD_NUMBER=$BUILD_NUMBER" >> .env
-        //         echo "AUTH_GOOGLE_ID=$AUTH_GOOGLE_ID" >> .env
-        //         echo "AUTH_GOOGLE_SECRET=$AUTH_GOOGLE_SECRET" >> .env
-        //         echo "NODE_ENV=production" >> .env
-        //         """
+        //         script {
+        //             sh """
+        //             sudo docker build -t ${DOCKER_IMAGE} .
+        //             """
+        //         }
         //     }
         // }
-        
-        // stage('Build Docker Image') {
+        // stage('docker start') {
         //     steps {
-        //         sh 'sudo docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
+        //         script {
+        //             sh """
+        //             sudo docker run -p 3000:3000 --name ${DOCKER_IMAGE} -e DATABASE_URL=${DATABASE_URL} -e AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID} -e AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET} -e NODE_ENV=${NODE_ENV} -e POSTGRES_USER=${POSTGRES_USER} -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -e POSTGRES_DB=${POSTGRES_DB} -d ${DOCKER_IMAGE}
+        //             """
+        //         }
         //     }
         // }
-        // stage('Login to GHCR') {
-        //     steps {
-        //         sh 'echo $GITHUB_TOKEN_PSW | sudo docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
-        //     }
-        // }
-        // stage('tag image') {
-        //     steps {
-        //         sh 'sudo docker tag $DOCKER_IMAGE:$BUILD_NUMBER ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
-        //     }
-        // }
-        // stage('push image') {
-        //     steps {
-        //         sh 'sudo docker push ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
-        //     }
-        // }
-        stage("Docker compose down"){
+        stage('Build Docker Image') {
             steps {
-                sh """
-                sudo docker compose down
-                sudo docker container rm nihongo
-                """
+                sh 'sudo docker compose build'
             }
         }
-        stage('Deploy with Docker Compose') {
+        stage('Deploy Containers') {
             steps {
-                sh """
-                sudo docker compose up -d
-                """
+                sh 'sudo docker-compose up -d'
             }
         }
 
@@ -74,9 +52,5 @@ pipeline {
             }
         }
     }
-    // post{
-    //     always {
-    //         sh("docker logout")
-    //     }
-    // }
+    
 }
