@@ -10,11 +10,9 @@ RUN npm exec auth secret
 RUN npx prisma generate 
 RUN npm run build
 
-# Set environment variable for the port
 ENV PORT=3001
-
 # Expose the application port
-EXPOSE ${PORT}
+EXPOSE 3001
 
-# Start the application
-CMD ["npm", "run", "start", "-p", "${PORT}"]
+# Start the application with port 3001
+CMD ["npm", "run", "start"]
