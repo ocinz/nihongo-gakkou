@@ -23,7 +23,7 @@ services:
         NODE_ENV: ${NODE_ENV}
         NEXTAUTH_URL: ${NEXTAUTH_URL}
         AUTH_TRUST_HOST: ${AUTH_TRUST_HOST}
-        PORT: ${PORT}
+        TECH_PORT: ${TECH_PORT}
         DATABASE_URL: ${DATABASE_URL}
     environment:
       - AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}
@@ -31,7 +31,7 @@ services:
       - NODE_ENV=${NODE_ENV}
       - NEXTAUTH_URL=${NEXTAUTH_URL}
       - AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
-      - PORT=${PORT}
+      - TECH_PORT=${TECH_PORT}
       - DATABASE_URL=${DATABASE_URL}
     ports:
       - 3001:3001

@@ -3,7 +3,7 @@ pipeline {
     environment {
         NEXTAUTH_URL = "http://localhost:3001"
         AUTH_TRUST_HOST = "True"
-        PORT = credentials('NIHONGO_GAKKOU_PORT')
+        TECH_PORT = credentials('NIHONGO_GAKKOU_PORT')
         DATABASE_URL = credentials('NIHONGO_GAKKOU_DATABASE_URL')
         AUTH_GOOGLE_ID= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_ID')
         AUTH_GOOGLE_SECRET= credentials('NIHONGO_GAKKOU_AUTH_GOOGLE_SECRET')
@@ -20,7 +20,7 @@ pipeline {
                     sh """
                     echo "NEXTAUTH_URL=${NEXTAUTH_URL}"
                     echo "AUTH_TRUST_HOST=${AUTH_TRUST_HOST}"
-                    echo "PORT=${PORT}"
+                    echo "PORT=${TECH_PORT}"
                     echo "DATABASE_URL=${DATABASE_URL}"
                     """
                 }
