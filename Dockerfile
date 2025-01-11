@@ -9,7 +9,8 @@ FROM base AS builder
 RUN apk add --no-cache postgresql-client
 
 COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+RUN npm install 
+RUN npx prisma generate 
 
 # ARG DATABASE_URL
 # ENV DATABASE_URL=${DATABASE_URL}

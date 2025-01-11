@@ -47,13 +47,7 @@ pipeline {
         //         sh 'sudo docker push ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
         //     }
         // }
-        stage("Prisma Generate"){
-            steps {
-                sh """
-                sudo npm run prisma generate
-                """
-            }
-        }
+        
         stage('Deploy with Docker Compose') {
             steps {
                 sh """
