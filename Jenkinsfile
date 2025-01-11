@@ -10,7 +10,7 @@ pipeline {
         POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
-        NEXTAUTH_URL = "https://nihongo.ocinz.tech"
+        NEXTAUTH_URL = " http://localhost:3001"
     }
     stages {
         stage('Docker Compose Down') {
