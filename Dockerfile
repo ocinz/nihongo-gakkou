@@ -47,6 +47,7 @@ WORKDIR /app
 
 COPY . .
 RUN npm install 
+RUN npm exec auth secret
 RUN npx prisma generate 
 RUN npm run build
 
