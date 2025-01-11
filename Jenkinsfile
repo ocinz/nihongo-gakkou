@@ -47,11 +47,17 @@ pipeline {
         //         sh 'sudo docker push ghcr.io/$DOCKER_IMAGE:$BUILD_NUMBER'
         //     }
         // }
-        
-        stage('Deploy with Docker Compose') {
+        stage("Docker compose down"){
             steps {
                 sh """
                 sudo docker compose down
+                sudo docker container rm nihongo
+                """
+            }
+        }
+        stage('Deploy with Docker Compose') {
+            steps {
+                sh """
                 sudo docker compose up -d
                 """
             }
