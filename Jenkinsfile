@@ -9,7 +9,7 @@ pipeline {
         POSTGRES_USER = credentials('NIHONGO_GAKKOU_POSTGRES_USER')     
         POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
-        GITHUB_TOKEN = credentials('github-token')
+        // GITHUB_TOKEN = credentials('github-token')
         NEXTAUTH_URL = "http://localhost:3001"
         AUTH_TRUST_HOST="True"
         PORT=3001
