@@ -10,6 +10,7 @@ pipeline {
         POSTGRES_PASSWORD = credentials('NIHONGO_GAKKOU_POSTGRES_PASSWORD')
         POSTGRES_DB = credentials('NIHONGO_GAKKOU_POSTGRES_DB')
         GITHUB_TOKEN = credentials('github-token')
+        NEXTAUTH_URL = "https://nihongo.ocinz.tech"
     }
     stages {
         stage('Docker Compose Down') {
@@ -42,15 +43,15 @@ pipeline {
             }
         }
 
-        // stage('Prisma Migrations') {
-        //     steps {
-        //         script {
-        //             sh """
-        //             sudo docker compose exec -T ${BUILD} npx prisma migrate deploy
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Prisma Migrations') {
+            steps {
+                script {
+                    sh """
+                    sudo docker compose exec -T nihongo npx prisma migrate deploy
+                    """
+                }
+            }
+        }
     }
     
 }
