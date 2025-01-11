@@ -50,7 +50,7 @@ pipeline {
         stage("Prisma Generate"){
             steps {
                 sh """
-                sudo npx prisma generate
+                sudo npm run prisma generate
                 """
             }
         }
